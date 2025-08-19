@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Stoicisme: Filsafat untuk Hati yang Kuat</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@500;700;800&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    :root{
+      --gold: #f1c376; /* warm gold */
+      --deep: #0b0f16; /* very dark navy */
+      --ink: #0e1320;
+      --muted: #96a0b5;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(1200px 600px at 75% -10%, rgba(241,195,118,0.10), transparent),
+                  radial-gradient(900px 600px at 15% 110%, rgba(241,195,118,0.06), transparent),
+                  linear-gradient(180deg, #0a0e15 0%, #0b0f16 30%, #0b0f16 100%);
+      color: #e5eaf2;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+    }
+    .title-font { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; letter-spacing:.5px; }
+    .gold-text { background: linear-gradient(90deg, #f9e6bd, var(--gold), #d39b40); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .btn-gold {
+      background: linear-gradient(135deg, #3a2a12, #1d1408);
+      border: 1px solid rgba(241,195,118,.45);
+      color: #f6e9cf;
+      transition: all .25s ease;
+      box-shadow: 0 0 0 rgba(241,195,118,0);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(241,195,118,.25), inset 0 0 12px rgba(241,195,118,.15);
+      border-color: rgba(241,195,118,.75);
+    }
+    .glow-ring { position: relative; isolation:isolate; }
+    .glow-ring::after{
+      content:""; position:absolute; inset:-16%; border-radius:9999px;
+      background: radial-gradient(circle at 50% 50%, rgba(241,195,118,.25), rgba(241,195,118,0) 60%);
+      filter: blur(18px); z-index:-1; animation: pulse 4.5s ease-in-out infinite;
+    }
+    @keyframes pulse{ 0%,100%{opacity:.55} 50%{opacity:1} }
+    .carousel-mask::-webkit-scrollbar { height: 8px; }
+    .carousel-mask::-webkit-scrollbar-thumb { background: rgba(150,150,170,.25); border-radius: 9999px; }
+    .quote-card{
+      backdrop-filter: blur(6px); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .quote-card:hover{
+      transform: translateY(-6px); box-shadow: 0 18px 42px rgba(241,195,118,.18);
+      border-color: rgba(241,195,118,.45);
+    }
+    .grid-lines{
+      background-image: linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+                        linear-gradient(180deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 14rem 100%, 100% 14rem; background-position: 0 0, 0 0;
+    }
+    .parallax-scene img{ will-change: transform; }
+    .sr-only-focusable:focus{ position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-yellow-200/20 selection:text-yellow-100">
+
+  <header class="fixed top-0 inset-x-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/40 border-b border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2 group">
+        <span class="title-font text-2xl tracking-wide gold-text">stoicabis</span>
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-200/90">
+        <a href="#sejarah" class="hover:text-yellow-200 transition">Sejarah</a>
+        <a href="#praktik" class="hover:text-yellow-200 transition">Praktik</a>
+        <a href="#manfaat" class="hover:text-yellow-200 transition">Mengapa</a>
+        <a href="#kutipan" class="hover:text-yellow-200 transition">Kutipan & Video</a>
+      </nav>
+
+      <div class="md:hidden">
+        <button id="hamburger-btn" class="text-slate-200 hover:text-yellow-200" aria-label="Buka menu">
+          <i data-feather="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+      
+      <a href="#footer" class="hidden md:block btn-gold px-4 py-2 rounded-full text-sm">Eksplor</a>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-deep/95 backdrop-blur-lg">
+    <div class="flex justify-end p-4">
+      <button id="close-menu-btn" class="text-slate-200 hover:text-yellow-200" aria-label="Tutup menu">
+        <i data-feather="x" class="w-8 h-8"></i>
+      </button>
+    </div>
+    <nav class="flex flex-col items-center justify-center h-full -mt-16 space-y-8 text-xl">
+      <a href="#sejarah" class="mobile-link hover:text-yellow-200 transition">Sejarah</a>
+      <a href="#praktik" class="mobile-link hover:text-yellow-200 transition">Praktik</a>
+      <a href="#manfaat" class="mobile-link hover:text-yellow-200 transition">Mengapa</a>
+      <a href="#kutipan" class="mobile-link hover:text-yellow-200 transition">Kutipan & Video</a>
+      <a href="#footer" class="mt-4 btn-gold px-5 py-3 rounded-full text-base">Eksplor</a>
+    </nav>
+  </div>
+
+  <section id="home" class="relative overflow-hidden pt-28">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 grid-lines"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6" data-aos="fade-right">
+          <h1 class="title-font text-4xl sm:text-5xl lg:text-6xl leading-tight">
+            <span class="block">Stoicisme:</span>
+            <span class="gold-text">Filsafat untuk Hati yang Kuat</span>
+          </h1>
+          <p class="text-slate-300/90 max-w-prose">
+            Stoicisme adalah aliran filsafat Yunani-Romawi yang menekankan hidup selaras dengan <em>logos</em> (akal budi),
+            menerima hal-hal di luar kuasa, dan memelihara kebajikan sebagai sumber <strong>Eudaimonia</strong>
+            — kebahagiaan sejati yang kokoh, bukan sekadar kesenangan sesaat.
+          </p>
+          <div class="flex gap-3">
+            <a href="#praktik" class="btn-gold px-5 py-3 rounded-full text-sm">Mulai dari Praktik</a>
+            <a href="#sejarah" class="px-5 py-3 rounded-full text-sm border border-white/10 hover:border-yellow-300/60 hover:text-yellow-200 transition">Pelajari Sejarah</a>
+          </div>
+          <p class="text-xs text-slate-400">Gulir ke bawah untuk melihat lebih banyak ↓</p>
+        </div>
+        <div class="relative parallax-scene" data-aos="fade-left">
+          <div class="absolute -inset-10 rounded-full blur-3xl bg-yellow-500/10"></div>
+          <img
+            id="hero-bust"
+            class="relative mx-auto w-72 sm:w-96 glow-ring drop-shadow-[0_25px_55px_rgba(241,195,118,.15)]"
+            alt="Patung Marcus Aurelius (gambar stok bebas royalti)"
+            src="m_1.png"
+          />
+          <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-full bg-yellow-400/20 blur-2xl mix-blend-screen"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="h-24"></div>
+  </section>
+
+  <section id="sejarah" class="relative py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <header class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8" data-aos="fade-up">
+        <div class="max-w-2xl">
+          <h2 class="title-font text-3xl sm:text-4xl">Sejarah Singkat</h2>
+          <p class="text-slate-400 mt-1">Lahir di Stoa Poikile, berkembang di dunia Yunani dan Romawi. Di bawah ini beberapa tokoh utama serta kontribusinya.</p>
+          <button id="show-history-modal" class="mt-5 btn-gold px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2">
+            <i data-feather="book-open" class="w-4 h-4"></i>
+            Lihat Sejarah Lengkap
+          </button>
+        </div>
+        <div class="hidden sm:flex gap-2 mt-4 sm:mt-0">
+          <button id="prevBtn" class="btn-gold w-10 h-10 rounded-full flex items-center justify-center" aria-label="Sebelumnya"><i data-feather="chevron-left"></i></button>
+          <button id="nextBtn" class="btn-gold w-10 h-10 rounded-full flex items-center justify-center" aria-label="Berikutnya"><i data-feather="chevron-right"></i></button>
+        </div>
+      </header>
+      
+      <div class="relative">
+        <div id="carousel" class="carousel-mask grid grid-flow-col auto-cols-[80%] sm:auto-cols-[45%] md:auto-cols-[40%] lg:auto-cols-[31%] gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory pb-6"
+             role="region" aria-label="Linimasa Filsuf Stoik">
+          
+          <article class="snap-start flex flex-col bg-gradient-to-b from-white/5 to-transparent p-5 rounded-2xl quote-card" data-aos="fade-up">
+            <div class="overflow-hidden rounded-xl mb-4 bg-black/20">
+              <img class="w-full aspect-[4/3] object-cover" src="zeno1.png" alt="Patung Zeno dari Kition"/>
+            </div>
+            <div class="flex flex-col flex-grow">
+              <h3 class="title-font text-xl">Zeno dari Kition</h3>
+              <p class="text-xs text-slate-400">± 334–262 SM</p>
+              <p class="mt-2 text-slate-300 text-sm leading-relaxed flex-grow">Pendiri Stoicisme; mengajar di Stoa Poikile, menekankan hidup sesuai alam dan disiplin batin.</p>
+            </div>
+          </article>
+          
+          <article class="snap-start flex flex-col bg-gradient-to-b from-white/5 to-transparent p-5 rounded-2xl quote-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="overflow-hidden rounded-xl mb-4 bg-black/20">
+              <img class="w-full aspect-[4/3] object-cover" src="patung Chrysippu.png" alt="Patung Chrysippus"/>
+            </div>
+            <div class="flex flex-col flex-grow">
+                <h3 class="title-font text-xl">Chrysippus</h3>
+                <p class="text-xs text-slate-400">± 279–206 SM</p>
+                <p class="mt-2 text-slate-300 text-sm flex-grow">Sistematisator doktrin Stoik, terutama logika proposisional dan etika kebajikan yang rasional.</p>
+            </div>
+          </article>
+          
+          <article class="snap-start flex flex-col bg-gradient-to-b from-white/5 to-transparent p-5 rounded-2xl quote-card" data-aos="fade-up" data-aos-delay="100">
+             <div class="overflow-hidden rounded-xl mb-4 bg-black/20">
+              <img class="w-full aspect-[4/3] object-cover" src="patung Seneca.png" alt="Patung Seneca"/>
+            </div>
+            <div class="flex flex-col flex-grow">
+                <h3 class="title-font text-xl">Seneca</h3>
+                <p class="text-xs text-slate-400">± 4 SM–65 M</p>
+                <p class="mt-2 text-slate-300 text-sm flex-grow">Filsuf dan negarawan Romawi; surat-surat moralnya menekankan pengelolaan emosi, kefanaan, dan kebijaksanaan praktis.</p>
+            </div>
+          </article>
+          
+          <article class="snap-start flex flex-col bg-gradient-to-b from-white/5 to-transparent p-5 rounded-2xl quote-card" data-aos="fade-up" data-aos-delay="150">
+             <div class="overflow-hidden rounded-xl mb-4 bg-black/20">
+              <img class="w-full aspect-[4/3] object-cover" src="patung Epictetus.png" alt="Patung Epictetus"/>
+            </div>
+            <div class="flex flex-col flex-grow">
+                <h3 class="title-font text-xl">Epictetus</h3>
+                <p class="text-xs text-slate-400">± 55–135 M</p>
+                <p class="mt-2 text-slate-300 text-sm flex-grow">Mengajarkan dikotomi kendali: bedakan apa yang berada dalam kuasa kita dan yang tidak; fokus pada karakter.</p>
+            </div>
+          </article>
+          
+          <article class="snap-start flex flex-col bg-gradient-to-b from-white/5 to-transparent p-5 rounded-2xl quote-card" data-aos="fade-up" data-aos-delay="200">
+             <div class="overflow-hidden rounded-xl mb-4 bg-black/20">
+              <img class="w-full aspect-[4/3] object-cover" src="Untitled design.png" alt="Patung Marcus Aurelius"/>
+            </div>
+            <div class="flex flex-col flex-grow">
+                <h3 class="title-font text-xl">Marcus Aurelius</h3>
+                <p class="text-xs text-slate-400">121–180 M</p>
+                <p class="mt-2 text-slate-300 text-sm flex-grow">Kaisar-filsuf; menulis <em>Meditationes</em>, catatan reflektif tentang keteguhan, kerendahan hati, dan tugas.</p>
+            </div>
+          </article>
+        </div>
+        <div class="mt-4 flex sm:hidden justify-center gap-3">
+          <button id="prevBtnSm" class="btn-gold w-10 h-10 rounded-full flex items-center justify-center" aria-label="Sebelumnya"><i data-feather="chevron-left"></i></button>
+          <button id="nextBtnSm" class="btn-gold w-10 h-10 rounded-full flex items-center justify-center" aria-label="Berikutnya"><i data-feather="chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="praktik" class="relative py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10" data-aos="fade-up">
+        <h2 class="title-font text-3xl sm:text-4xl">Praktik Umum</h2>
+        <p class="text-slate-400 max-w-2xl">Empat pilar klasik Stoik dengan contoh penerapan harian yang ringkas.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="p-6 rounded-2xl quote-card bg-white/5" data-aos="zoom-in-up">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-9 h-9 rounded-full bg-yellow-500/15 ring-1 ring-yellow-400/40 flex items-center justify-center"><i data-feather="cpu" class="text-yellow-300"></i></span>
+            <h3 class="title-font text-xl">Logika</h3>
+          </div>
+          <p class="text-slate-300 text-sm leading-relaxed">Melatih penalaran jernih dan berpikir kritis. <strong>Latihan:</strong> saat menerima informasi, tanyakan: “Apa buktinya? Apa asumsi saya?” Hindari generalisasi tergesa-gesa.</p>
+        </article>
+        <article class="p-6 rounded-2xl quote-card bg-white/5" data-aos="zoom-in-up" data-aos-delay="50">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-9 h-9 rounded-full bg-yellow-500/15 ring-1 ring-yellow-400/40 flex items-center justify-center"><i data-feather="sun" class="text-yellow-300"></i></span>
+            <h3 class="title-font text-xl">Fisika</h3>
+          </div>
+          <p class="text-slate-300 text-sm">Memahami keteraturan alam dan kefanaan. <strong>Latihan:</strong> refleksi pagi/sore tentang perubahan; syukuri hal yang hadir hari ini karena sifatnya sementara.</p>
+        </article>
+        <article class="p-6 rounded-2xl quote-card bg-white/5" data-aos="zoom-in-up" data-aos-delay="100">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-9 h-9 rounded-full bg-yellow-500/15 ring-1 ring-yellow-400/40 flex items-center justify-center"><i data-feather="heart" class="text-yellow-300"></i></span>
+            <h3 class="title-font text-xl">Etika</h3>
+          </div>
+          <p class="text-slate-300 text-sm">Kebajikan (kebijaksanaan, keadilan, keberanian, pengendalian diri) sebagai kebaikan tertinggi. <strong>Latihan:</strong> buat kompas nilai harian dan evaluasi keputusan terhadapnya.</p>
+        </article>
+        <article class="p-6 rounded-2xl quote-card bg-white/5" data-aos="zoom-in-up" data-aos-delay="150">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-9 h-9 rounded-full bg-yellow-500/15 ring-1 ring-yellow-400/40 flex items-center justify-center"><i data-feather="activity" class="text-yellow-300"></i></span>
+            <h3 class="title-font text-xl">Passion & Life</h3>
+          </div>
+          <p class="text-slate-300 text-sm">Mengelola emosi dengan rasional: emosi bukan musuh, namun tunduk pada penilaian benar. <strong>Latihan:</strong> terapkan “jeda 3 napas” sebelum merespon keadaan menekan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="manfaat" class="relative py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="order-2 lg:order-1 space-y-5" data-aos="fade-right">
+          <h2 class="title-font text-3xl sm:text-4xl">Mengapa Kita Butuh Filsafat?</h2>
+          <p class="text-slate-300 leading-relaxed">Di era serbacepat, Stoicisme membantu membedakan antara yang dapat kita kendalikan (niat, keputusan, tindakan) dan yang tidak (opini orang, cuaca, masa lalu). Dengan fokus pada karakter dan kebajikan, kita memperoleh ketenangan, ketangguhan, dan arah moral yang jelas.</p>
+          <blockquote class="p-5 rounded-xl border border-yellow-400/30 bg-yellow-500/5 text-yellow-100/90 italic">“Kebahagiaan hidupmu bergantung pada kualitas pikiranmu.” — Marcus Aurelius</blockquote>
+          <p class="text-slate-400 text-sm">Manfaat praktis: resiliensi saat krisis, komunikasi lebih tenang, produktivitas yang etis, serta relasi yang sehat melalui empati rasional.</p>
+        </div>
+        <div class="order-1 lg:order-2 relative" data-aos="fade-left">
+          <img class="rounded-2xl w-full object-cover glow-ring" src="Untitled design.png" alt="Relief/Patung marmer klasik"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kutipan" class="relative py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <header class="mb-10" data-aos="fade-up">
+        <h2 class="title-font text-3xl sm:text-4xl">Kutipan & Video</h2>
+        <p class="text-slate-400">Koleksi kutipan Stoik (diterjemahkan) dan video pengantar singkat.</p>
+      </header>
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 grid sm:grid-cols-2 gap-6">
+          <figure class="quote-card p-6 rounded-2xl bg-white/5 group" data-aos="fade-up"><figcaption class="title-font text-lg mb-2">Epictetus</figcaption><p class="text-slate-300 leading-relaxed">“Bukan peristiwa yang mengganggu kita, melainkan penilaian kita tentang peristiwa itu.”</p><span class="mt-4 inline-flex items-center gap-2 text-xs text-yellow-200/80 opacity-0 group-hover:opacity-100 transition"><i data-feather="zap"></i>Refleksi: telusuri penilaianmu.</span></figure>
+          <figure class="quote-card p-6 rounded-2xl bg-white/5 group" data-aos="fade-up" data-aos-delay="50"><figcaption class="title-font text-lg mb-2">Seneca</figcaption><p class="text-slate-300">“Kita lebih sering menderita dalam imajinasi daripada kenyataan.”</p<span class="mt-4 inline-flex items-center gap-2 text-xs text-yellow-200/80 opacity-0 group-hover:opacity-100 transition"><i data-feather="target"></i>Latihan: realitas-check tertulis.</span></figure>
+          <figure class="quote-card p-6 rounded-2xl bg-white/5 group" data-aos="fade-up" data-aos-delay="100"><figcaption class="title-font text-lg mb-2">Marcus Aurelius</figcaption><p class="text-slate-300">“Apa pun yang terjadi padamu telah disediakan bagimu sejak awal dan terjalin dengan takdirmu.”</p><span class="mt-4 inline-flex items-center gap-2 text-xs text-yellow-200/80 opacity-0 group-hover:opacity-100 transition"><i data-feather="loader"></i>Catatan: terima lalu bertindak.</span></figure>
+          <figure class="quote-card p-6 rounded-2xl bg-white/5 group" data-aos="fade-up" data-aos-delay="150"><figcaption class="title-font text-lg mb-2">Chrysippus</figcaption><p class="text-slate-300">“Kebajikan berdiri pada tindakan yang selaras dengan akal yang benar.”</p><span class="mt-4 inline-flex items-center gap-2 text-xs text-yellow-200/80 opacity-0 group-hover:opacity-100 transition"><i data-feather="check-circle"></i>Fokus: akal budi → tindakan.</span></figure>
+        </div>
+        <div class="lg:col-span-1" data-aos="zoom-in">
+          <div class="relative overflow-hidden rounded-2xl ring-1 ring-white/10 quote-card">
+            <div class="aspect-video"><iframe class="w-full h-full" src="https://www.youtube.com/embed/Hv-viIMq9fg?si=o2eCnIWffZPSsRRx" title="Pengantar singkat Stoicisme (YouTube)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            <div class="p-4 text-sm text-slate-300 bg-black/30 border-t border-white/10">Filosofi Stoicism: Belajar Menjadi Tak Tergoyahkan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer" class="relative pt-16 pb-10 border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="title-font text-2xl gold-text">stoicabis</h3>
+          <p class="text-slate-400 mt-2 text-sm">Sumber belajar dasar tentang Stoicisme untuk masyarakat umum. Materi disusun ringkas, akurat, dan praktis.</p>
+          <a href="#home" class="inline-flex items-center gap-2 mt-4 btn-gold px-4 py-2 rounded-full text-sm"><i data-feather="arrow-up"></i>Kembali ke Atas</a>
+        </div>
+        <nav class="grid grid-cols-2 gap-6 md:col-span-2">
+          <div>
+            <h4 class="title-font mb-3">Navigasi</h4>
+            <ul class="space-y-2 text-sm text-slate-300">
+              <li><a class="hover:text-yellow-200" href="#sejarah">Sejarah</a></li>
+              <li><a class="hover:text-yellow-200" href="#praktik">Praktik Umum</a></li>
+              <li><a class="hover:text-yellow-200" href="#manfaat">Mengapa Filsafat</a></li>
+              <li><a class="hover:text-yellow-200" href="#kutipan">Kutipan & Video</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="title-font mb-3">Lisensi Gambar</h4>
+            <p class="text-xs text-slate-400">Foto patung dari Wikimedia Commons & Unsplash (bebas royalti/CC0/CC BY); disematkan via URL publik. Harap cek lisensi sumber asli bila digunakan ulang.</p>
+          </div>
+        </nav>
+      </div>
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+        <p>&copy; <span id="year"></span> stoicabis. Semua hak cipta konten dan desain situs ini dilindungi.</p>
+        <a href="#praktik" class="mt-3 sm:mt-0 px-4 py-2 rounded-full border border-white/10 hover:border-yellow-400/50 hover:text-yellow-200 transition">Eksplor Lebih Lanjut</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="history-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-deep border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8" data-aos="zoom-in-up">
+      <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-yellow-200" aria-label="Tutup">
+        <i data-feather="x" class="w-6 h-6"></i>
+      </button>
+      <h2 class="title-font text-2xl sm:text-3xl gold-text mb-4">Sejarah Lengkap Stoicisme</h2>
+      <div class="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+        <p>Stoicisme, didirikan oleh Zeno dari Kition di Athena sekitar awal abad ke-3 SM, memiliki sejarah panjang yang dibagi menjadi tiga periode utama:</p>
+        <h3 class="title-font text-lg text-yellow-200/90">1. Stoa Awal (Early Stoa)</h3>
+        <p>Periode ini dipelopori oleh <strong>Zeno</strong>, diikuti oleh muridnya Cleanthes dan Chrysippus. <strong>Chrysippus</strong> sangat krusial karena ia yang mensistematisasi ajaran Stoik ke dalam kerangka logika, fisika, dan etika yang koheren. Sayangnya, karya-karya dari periode ini sebagian besar hilang dan hanya diketahui dari kutipan penulis-penulis selanjutnya.</p>
+        <h3 class="title-font text-lg text-yellow-200/90">2. Stoa Tengah (Middle Stoa)</h3>
+        <p>Tokoh seperti Panaetius dan Posidonius memperkenalkan Stoicisme ke dunia Romawi pada abad ke-2 dan ke-1 SM. Mereka mengadaptasi beberapa ajaran yang lebih kaku agar lebih dapat diterima oleh kalangan elite Romawi, dengan fokus pada tugas dan tanggung jawab publik.</p>
+        <h3 class="title-font text-lg text-yellow-200/90">3. Stoa Akhir (Late Stoa) / Periode Romawi</h3>
+        <p>Ini adalah periode di mana karya-karya Stoik yang paling lengkap dan terkenal ditulis. Berbeda dengan periode awal yang abstrak, periode ini sangat fokus pada etika praktis. Tokoh utamanya adalah <strong>Lucius Annaeus Seneca</strong> (seorang dramawan dan penasihat Kaisar Nero), <strong>Epictetus</strong> (seorang budak yang dibebaskan dan menjadi guru filsafat), dan <strong>Marcus Aurelius</strong> (Kaisar Romawi). Tulisan mereka—surat, diskursus, dan catatan pribadi—menjadi panduan utama bagi siapa pun yang ingin mempelajari Stoicisme hari ini.</p>
+        <p class="pt-4 border-t border-white/10 text-slate-400">Filsafat ini mengajarkan bahwa kebajikan (<em>virtue</em>) adalah satu-satunya kebaikan sejati dan bahwa hal-hal eksternal seperti kekayaan, kesehatan, atau reputasi bersifat netral (<em>indifferents</em>). Kunci kebahagiaan (<em>eudaimonia</em>) adalah hidup selaras dengan alam atau akal budi (<em>logos</em>).</p>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Inisialisasi AOS
+    AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+    // Inisialisasi Feather Icons
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.feather) {
+        feather.replace({ 'stroke-width': 1.4 });
+      }
+    });
+    
+    // --- SCRIPT BARU UNTUK NAVIGASI MOBILE & MODAL ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      const showHistoryModalBtn = document.getElementById('show-history-modal');
+      const historyModal = document.getElementById('history-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      
+      // Fungsi untuk Buka/Tutup Menu Mobile
+      const openMenu = () => {
+        mobileMenu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeMenu = () => {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+      
+      hamburgerBtn.addEventListener('click', openMenu);
+      closeMenuBtn.addEventListener('click', closeMenu);
+      mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+      // Fungsi untuk Buka/Tutup Modal Sejarah
+      const openModal = () => {
+        historyModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeModal = () => {
+        historyModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+
+      showHistoryModalBtn.addEventListener('click', openModal);
+      closeModalBtn.addEventListener('click', closeModal);
+      // Tutup modal jika klik di luar area konten
+      historyModal.addEventListener('click', (e) => {
+        if (e.target === historyModal) {
+          closeModal();
+        }
+      });
+    });
+    
+    // --- SCRIPT LAMA YANG MASIH RELEVAN ---
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        // Cek apakah link berasal dari menu mobile untuk menutup menu
+        if (a.classList.contains('mobile-link')) {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        const top = el.getBoundingClientRect().top + window.scrollY - 64; // offset navbar
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    // Kontrol Carousel
+    const carousel = document.getElementById('carousel');
+    function scrollByCard(dir = 1){
+      const card = carousel.querySelector('article');
+      const delta = card ? card.getBoundingClientRect().width + 24 : 320; // 24 adalah gap
+      carousel.scrollBy({ left: dir * delta, behavior: 'smooth' });
+    }
+    ['prevBtn','prevBtnSm'].forEach(id => {
+      const btn = document.getElementById(id);
+      if(btn) btn.addEventListener('click', () => scrollByCard(-1));
+    });
+    ['nextBtn','nextBtnSm'].forEach(id => {
+      const btn = document.getElementById(id);
+      if(btn) btn.addEventListener('click', () => scrollByCard(1));
+    });
+
+    // GSAP (dijalankan setelah load)
+    window.addEventListener('load', () => {
+      if (!window.gsap) return;
+      gsap.to('#hero-bust', { y: 10, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('#hero-bust', {
+        yPercent: 12,
+        scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.utils.toArray('h1, h2').forEach(el => {
+        gsap.from(el, { opacity:0, y:20, duration:.8, ease:'power2.out', scrollTrigger:{ trigger:el, start:'top 80%' } });
+      });
+    });
+
+    // Copyright Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
+
+
+
